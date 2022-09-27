@@ -1,6 +1,6 @@
+import { configParticlesProps } from "particles-ts";
 import { useContext } from "react";
 import { ConfigParticlesContext } from "../../hooks/useConfigParticles";
-import { configParticlesProps } from "../../utils/particles/config";
 import { Button } from "../button";
 import { ConfigInteractivities } from "./interactivities";
 import { ConfigParticles } from "./particles";

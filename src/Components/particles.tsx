@@ -1,0 +1,52 @@
+import { Component, ReactNode } from "react";
+import { destroy, load } from "../utils/particles";
+import { configParticlesProps } from "../utils/particles/config";
+
+interface ParticlesProps {
+  config: configParticlesProps | undefined;
+  children: ReactNode;
+}
+
+export class Particles extends Component<ParticlesProps> {
+  constructor(props: ParticlesProps) {
+    super(props);
+
+    this.state = {
+      lastRenderedComponent: new Date().getTime(),
+    };
+  }
+
+  setLastRenderedComponent = (time: number) => {
+    this.setState({ lastRenderedComponent: time });
+  };
+
+  componentDidUpdate = (nextProps: {
+    config: configParticlesProps | undefined;
+  }) => {
+    if (nextProps.config !== this.props.config) {
+      try {
+        destroy();
+      } catch {}
+
+      load("particles-js", this.props.config, function () {});
+    }
+  };
+
+  componentDidMount = () => {
+    load("particles-js", this.props.config, function () {});
+  };
+
+  componentWillUnmount = () => {
+    destroy();
+  };
+
+  render(): ReactNode {
+    return (
+      <>
+        <div id="particles-js" style={{ width: "100%" }}>
+          {this.props.children}
+        </div>
+      </>
+    );
+  }
+}

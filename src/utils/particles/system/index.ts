@@ -10,7 +10,7 @@ export const system = new System();
 
 export const systemParticles = (
   tag_id: string,
-  params: configParticlesProps
+  params?: configParticlesProps
 ) => {
   const el: HTMLCanvasElement | null = document.querySelector(
     "#" + tag_id + " > .particles-js-canvas-el"

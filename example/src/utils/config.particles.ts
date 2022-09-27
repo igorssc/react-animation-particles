@@ -1,4 +1,4 @@
-import { configParticlesProps } from "./particles/config";
+import { configParticlesProps } from "particles-ts";
 
 export const configParticles: configParticlesProps = {
   particles: {

@@ -1,41 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import githubLogo from "./assets/github-logo-bold.svg";
-import { Controls } from "./Components/controls";
+import React, { Component, ReactNode } from "react";
 import { Particles } from "./Components/particles";
-import "./global.css";
-import { ConfigParticlesProvider } from "./hooks/useConfigParticles";
-import styles from "./index.module.css";
-import reportWebVitals from "./reportWebVitals";
+import { configParticlesProps } from "./utils/particles/config";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <ConfigParticlesProvider>
-      <Particles>
-        <div className={styles.container}>
-          <div className={styles.menu}>
-            <div className={styles.controls}>
-              <Controls />
-            </div>
-            <div>
-              <a
-                href="https://github.com/igorssc/particles"
-                target="_blank"
-                rel="noreferrer"
-                className={styles.githubLink}
-              >
-                <img src={githubLogo} alt="GitHub Logo" />
-                GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-      </Particles>
-    </ConfigParticlesProvider>
-  </React.StrictMode>
-);
+interface BackgroundParticlesProps {
+  children: ReactNode;
+  config?: configParticlesProps;
+}
 
-reportWebVitals();
+export class BackgroundParticles extends Component<BackgroundParticlesProps> {
+  render() {
+    return (
+      <React.StrictMode>
+        <Particles config={this.props.config}>{this.props.children}</Particles>
+      </React.StrictMode>
+    );
+  }
+}
+
+export type { configParticlesProps } from "./utils/particles/config";
+export { destroy, load } from "./utils/particles/index";

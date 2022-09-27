@@ -6,7 +6,7 @@ let pJSDom: Array<void> = [];
 
 export const load = (
   tag_id: string,
-  config_json: configParticlesProps,
+  config_json?: configParticlesProps,
   callback?: () => void
 ) => {
   /* pJS elements */
@@ -26,6 +26,9 @@ export const load = (
   /* create canvas element */
   const canvas_el = document.createElement("canvas");
   canvas_el.className = pJS_canvas_class;
+  canvas_el.style.zIndex = "1";
+  canvas_el.style.width = "100%";
+  canvas_el.style.position = "absolute";
 
   /* append canvas */
   const canvas = document.getElementById(tag_id)?.prepend(canvas_el);

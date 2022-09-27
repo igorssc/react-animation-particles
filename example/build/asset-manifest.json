@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7de7cdd4.css",
+    "main.js": "/static/js/main.5e8823bb.js",
+    "static/media/github-logo-bold.svg": "/static/media/github-logo-bold.6a71b2bea5e8c434e4aca8aa083c9f62.svg",
+    "index.html": "/index.html",
+    "static/media/caret-right-bold.svg": "/static/media/caret-right-bold.5e2ea146493103a88c092563b5fa1835.svg",
+    "main.7de7cdd4.css.map": "/static/css/main.7de7cdd4.css.map",
+    "main.5e8823bb.js.map": "/static/js/main.5e8823bb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7de7cdd4.css",
+    "static/js/main.5e8823bb.js"
+  ]
+}
