@@ -1,0 +1,8 @@
+.container {
+  position: relative;
+  z-index: 20;
+}
+
+.hidden {
+  max-height: 0;
+}

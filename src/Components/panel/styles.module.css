@@ -1,0 +1,12 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 10px 20px 10px 0;
+  align-items: center;
+}
+
+.container > h2 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: medium;
+}

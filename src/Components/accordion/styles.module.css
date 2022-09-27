@@ -1,0 +1,44 @@
+.accordion {
+  background-color: #237fad;
+  color: #fff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  display: flex;
+  border-bottom: 1px solid #fff;
+  align-items: center;
+  gap: 10px;
+}
+
+.active,
+.accordion:hover {
+  background-color: #199ada;
+}
+
+.panel {
+  flex: 0;
+  padding-left: 10px;
+  background-color: #fff;
+  transition: all 0.3s;
+  overflow: hidden;
+  height: 0;
+}
+
+.panel.visible {
+  height: auto;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.2s;
+}
+
+.icon.visible {
+  transform: rotate(90deg);
+}

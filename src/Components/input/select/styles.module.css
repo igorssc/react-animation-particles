@@ -1,0 +1,6 @@
+.container select {
+  width: 100%;
+  background-color: #d3d3d3;
+  border: none;
+  padding: 5px;
+}
