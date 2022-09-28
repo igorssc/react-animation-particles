@@ -18,6 +18,7 @@
     "typescript",
     "frontend"
   ],
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "devDependencies": {
