@@ -52,7 +52,7 @@ Configure, export, and share your react-animation-particles configuration:
 
 ![Demo](https://user-images.githubusercontent.com/26682297/192793755-76c6a16b-eafe-4300-9c05-56df42021ef9.gif)
 
-Access <https://www.react-animation-particles.vercel.app>
+Access <https://react-animation-particles.vercel.app>
 
 **particles.config.json**
 
