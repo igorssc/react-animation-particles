@@ -12,7 +12,6 @@
     "url": "https://github.com/igorssc/particles-ts",
     "directory": "example"
   },
-  "private": true,
   "dependencies": {},
   "devDependencies": {
     "particles-ts": "file:../",
