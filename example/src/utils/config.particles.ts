@@ -1,4 +1,4 @@
-import { configParticlesProps } from "particles-ts";
+import { configParticlesProps } from "react-animation-particles";
 
 export const configParticles: configParticlesProps = {
   particles: {

@@ -1,5 +1,5 @@
-import { Particles as BackgroundParticles } from "particles-ts";
 import { ReactNode, useContext } from "react";
+import { Particles as BackgroundParticles } from "react-animation-particles";
 import { ConfigParticlesContext } from "../../hooks/useConfigParticles";
 
 interface ParticlesProps {

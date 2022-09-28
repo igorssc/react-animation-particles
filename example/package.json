@@ -1,20 +1,20 @@
 {
-  "name": "particles-ts-example",
+  "name": "react-animation-particles-example",
   "version": "1.0.0",
   "author": "Igor Santos <igorsantoscosta@gmail.com>",
   "description": "A lightweight JavaScript library for creating particles",
-  "homepage": "https://particles-ts.vercel.app",
+  "homepage": "https://react-animation-particles.vercel.app",
   "bugs": {
-    "url": "https://github.com/igorssc/particles-ts/issues"
+    "url": "https://github.com/igorssc/react-animation-particles/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/igorssc/particles-ts",
+    "url": "https://github.com/igorssc/react-animation-particles",
     "directory": "example"
   },
   "dependencies": {},
   "devDependencies": {
-    "particles-ts": "file:../",
+    "react-animation-particles": "file:../",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
