@@ -2,6 +2,16 @@
   "name": "particles",
   "version": "1.0.0",
   "author": "Igor Santos <igorsantoscosta@gmail.com>",
+  "description": "A lightweight JavaScript library for creating particles",
+  "homepage": "https://particles-ts.vercel.app",
+  "bugs": {
+    "url": "https://github.com/igorssc/particles-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igorssc/particles-ts",
+    "directory": "example"
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {

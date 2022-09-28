@@ -2,6 +2,15 @@
   "name": "particles",
   "version": "1.0.0",
   "author": "Igor Santos <igorsantoscosta@gmail.com>",
+  "description": "A lightweight JavaScript library for creating particles",
+  "homepage": "https://particles-ts.vercel.app",
+  "bugs": {
+    "url": "https://github.com/igorssc/particles-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igorssc/particles-ts"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "devDependencies": {
@@ -10,7 +19,6 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -24,10 +32,7 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "start": "rollup -c -w",
-    "prepare": "npm run build",
-    "demo:start": "gh-pages -d && npm init && npm run start",
-    "demo:build": "gh-pages -d && npm init && npm run build"
+    "start": "rollup -c -w"
   },
   "files": [
     "dist",

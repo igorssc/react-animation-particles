@@ -187,7 +187,7 @@ export const ConfigInteractivities = () => {
                 setValue={interactivity.modes.bubble.setSize}
               />
             </Panel>
-            <Panel title="Durantion (sec)">
+            <Panel title="Duration (sec)">
               <InputRange
                 min={0}
                 max={5}

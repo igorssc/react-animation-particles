@@ -33,6 +33,26 @@ root.render(
           </div>
         </div>
       </Particles>
+      <Particles>
+        <div className={styles.container}>
+          <div className={styles.menu}>
+            <div className={styles.controls}>
+              <Controls />
+            </div>
+            <div>
+              <a
+                href="https://github.com/igorssc/particles"
+                target="_blank"
+                rel="noreferrer"
+                className={styles.githubLink}
+              >
+                <img src={githubLogo} alt="GitHub Logo" />
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </Particles>
     </ConfigParticlesProvider>
   </React.StrictMode>
 );

@@ -20,12 +20,19 @@ export const particlesDraw = () => {
 };
 
 export const particleDraw = (p: Particle) => {
+  let radius: number | undefined = undefined;
+  let opacity: number | undefined = undefined;
+
   if (p.radius_bubble) {
-    p.radius = p.radius_bubble;
+    radius = p.radius_bubble;
+  } else {
+    radius = p.radius;
   }
 
   if (p.opacity_bubble) {
-    p.opacity = p.opacity_bubble;
+    opacity = p.opacity_bubble;
+  } else {
+    opacity = p.opacity;
   }
 
   let color_value: string;
@@ -39,7 +46,7 @@ export const particleDraw = (p: Particle) => {
       "," +
       p.color.rgb.b +
       "," +
-      p.opacity +
+      opacity +
       ")";
   } else {
     color_value =
@@ -50,7 +57,7 @@ export const particleDraw = (p: Particle) => {
       "%," +
       p.color.hsl?.l +
       "%," +
-      p.opacity +
+      opacity +
       ")";
   }
 
@@ -60,24 +67,24 @@ export const particleDraw = (p: Particle) => {
   // eslint-disable-next-line default-case
   switch (p.shape) {
     case "circle":
-      canvasPropsEl.ctx?.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+      canvasPropsEl.ctx?.arc(p.x, p.y, radius, 0, Math.PI * 2, false);
       break;
 
     case "edge":
       canvasPropsEl.ctx?.rect(
-        p.x - p.radius,
-        p.y - p.radius,
-        p.radius * 2,
-        p.radius * 2
+        p.x - radius,
+        p.y - radius,
+        radius * 2,
+        radius * 2
       );
       break;
 
     case "triangle":
       drawShape(
         canvasPropsEl.ctx as CanvasRenderingContext2D,
-        p.x - p.radius,
-        p.y + p.radius / 1.66,
-        p.radius * 2,
+        p.x - radius,
+        p.y + radius / 1.66,
+        radius * 2,
         3,
         2
       );
@@ -87,11 +94,11 @@ export const particleDraw = (p: Particle) => {
       drawShape(
         canvasPropsEl.ctx as CanvasRenderingContext2D,
         p.x -
-          p.radius /
+          radius /
             (system.configParticlesFinal.particles.shape.polygon.nb_sides /
               3.5), // startX
-        p.y - p.radius / (2.66 / 3.5), // startY
-        (p.radius * 2.66) /
+        p.y - radius / (2.66 / 3.5), // startY
+        (radius * 2.66) /
           (system.configParticlesFinal.particles.shape.polygon.nb_sides / 3), // sideLength
         system.configParticlesFinal.particles.shape.polygon.nb_sides, // sideCountNumerator
         1 // sideCountDenominator
@@ -102,10 +109,10 @@ export const particleDraw = (p: Particle) => {
       drawShape(
         canvasPropsEl.ctx as CanvasRenderingContext2D,
         p.x -
-          (p.radius * 2) /
+          (radius * 2) /
             (system.configParticlesFinal.particles.shape.polygon.nb_sides / 4), // startX
-        p.y - p.radius / ((2 * 2.66) / 3.5), // startY
-        (p.radius * 2 * 2.66) /
+        p.y - radius / ((2 * 2.66) / 3.5), // startY
+        (radius * 2 * 2.66) /
           (system.configParticlesFinal.particles.shape.polygon.nb_sides / 3), // sideLength
         system.configParticlesFinal.particles.shape.polygon.nb_sides, // sideCountNumerator
         2 // sideCountDenominator
@@ -124,10 +131,10 @@ export const particleDraw = (p: Particle) => {
       const drawImage = () => {
         canvasPropsEl.ctx?.drawImage(
           img_obj as HTMLImageElement,
-          p.x - p.radius,
-          p.y - p.radius,
-          p.radius * 2,
-          (p.radius * 2) / (p.img as { ratio: number }).ratio
+          p.x - (radius as number),
+          p.y - (radius as number),
+          (radius as number) * 2,
+          ((radius as number) * 2) / (p.img as { ratio: number }).ratio
         );
       };
 

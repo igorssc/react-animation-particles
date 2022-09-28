@@ -1,4 +1,4 @@
-import React, {
+import {
   Dispatch,
   SetStateAction,
   useContext,
@@ -27,6 +27,9 @@ export const ConfigParticles = () => {
     image: false,
   });
 
+  const [particlesColorValue, setParticlesColorValue] = useState("#199ada");
+  const [particlesColorRandom, setParticlesColorRandom] = useState(false);
+
   useEffect(() => {
     particles.shape.setType(
       formatObjectMode(particlesShapeType) as Array<
@@ -35,6 +38,15 @@ export const ConfigParticles = () => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [particlesShapeType]);
+
+  useEffect(() => {
+    if (particlesColorRandom) {
+      particles.color.setValue("random");
+    } else {
+      particles.color.setValue(particlesColorValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [particlesColorValue, particlesColorRandom]);
 
   return (
     <>
@@ -66,8 +78,14 @@ export const ConfigParticles = () => {
         <Accordion title="Color">
           <Panel title="Value">
             <InputColor
-              color={particles.color.value}
-              setColor={particles.color.setValue}
+              color={particlesColorValue}
+              setColor={setParticlesColorValue}
+            />
+          </Panel>
+          <Panel title="Random">
+            <InputCheckbox
+              value={particlesColorRandom}
+              setValue={setParticlesColorRandom}
             />
           </Panel>
         </Accordion>

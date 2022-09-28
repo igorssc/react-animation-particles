@@ -26,7 +26,7 @@ export const load = (
   /* create canvas element */
   const canvas_el = document.createElement("canvas");
   canvas_el.className = pJS_canvas_class;
-  canvas_el.style.zIndex = "1";
+  canvas_el.style.zIndex = "10";
   canvas_el.style.width = "100%";
   canvas_el.style.position = "absolute";
 

@@ -692,11 +692,19 @@ var particlesDraw = function () {
 };
 var particleDraw = function (p) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+    var radius = undefined;
+    var opacity = undefined;
     if (p.radius_bubble) {
-        p.radius = p.radius_bubble;
+        radius = p.radius_bubble;
+    }
+    else {
+        radius = p.radius;
     }
     if (p.opacity_bubble) {
-        p.opacity = p.opacity_bubble;
+        opacity = p.opacity_bubble;
+    }
+    else {
+        opacity = p.opacity;
     }
     var color_value;
     if (p.color.rgb) {
@@ -708,7 +716,7 @@ var particleDraw = function (p) {
                 "," +
                 p.color.rgb.b +
                 "," +
-                p.opacity +
+                opacity +
                 ")";
     }
     else {
@@ -720,7 +728,7 @@ var particleDraw = function (p) {
                 "%," +
                 ((_c = p.color.hsl) === null || _c === void 0 ? void 0 : _c.l) +
                 "%," +
-                p.opacity +
+                opacity +
                 ")";
     }
     canvasPropsEl.ctx && (canvasPropsEl.ctx.fillStyle = color_value);
@@ -728,21 +736,21 @@ var particleDraw = function (p) {
     // eslint-disable-next-line default-case
     switch (p.shape) {
         case "circle":
-            (_e = canvasPropsEl.ctx) === null || _e === void 0 ? void 0 : _e.arc(p.x, p.y, p.radius, 0, Math.PI * 2, false);
+            (_e = canvasPropsEl.ctx) === null || _e === void 0 ? void 0 : _e.arc(p.x, p.y, radius, 0, Math.PI * 2, false);
             break;
         case "edge":
-            (_f = canvasPropsEl.ctx) === null || _f === void 0 ? void 0 : _f.rect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2);
+            (_f = canvasPropsEl.ctx) === null || _f === void 0 ? void 0 : _f.rect(p.x - radius, p.y - radius, radius * 2, radius * 2);
             break;
         case "triangle":
-            drawShape(canvasPropsEl.ctx, p.x - p.radius, p.y + p.radius / 1.66, p.radius * 2, 3, 2);
+            drawShape(canvasPropsEl.ctx, p.x - radius, p.y + radius / 1.66, radius * 2, 3, 2);
             break;
         case "polygon":
             drawShape(canvasPropsEl.ctx, p.x -
-                p.radius /
+                radius /
                     (system.configParticlesFinal.particles.shape.polygon.nb_sides /
                         3.5), // startX
-            p.y - p.radius / (2.66 / 3.5), // startY
-            (p.radius * 2.66) /
+            p.y - radius / (2.66 / 3.5), // startY
+            (radius * 2.66) /
                 (system.configParticlesFinal.particles.shape.polygon.nb_sides / 3), // sideLength
             system.configParticlesFinal.particles.shape.polygon.nb_sides, // sideCountNumerator
             1 // sideCountDenominator
@@ -750,10 +758,10 @@ var particleDraw = function (p) {
             break;
         case "star":
             drawShape(canvasPropsEl.ctx, p.x -
-                (p.radius * 2) /
+                (radius * 2) /
                     (system.configParticlesFinal.particles.shape.polygon.nb_sides / 4), // startX
-            p.y - p.radius / ((2 * 2.66) / 3.5), // startY
-            (p.radius * 2 * 2.66) /
+            p.y - radius / ((2 * 2.66) / 3.5), // startY
+            (radius * 2 * 2.66) /
                 (system.configParticlesFinal.particles.shape.polygon.nb_sides / 3), // sideLength
             system.configParticlesFinal.particles.shape.polygon.nb_sides, // sideCountNumerator
             2 // sideCountDenominator
@@ -769,7 +777,7 @@ var particleDraw = function (p) {
             }
             var drawImage = function () {
                 var _a;
-                (_a = canvasPropsEl.ctx) === null || _a === void 0 ? void 0 : _a.drawImage(img_obj_1, p.x - p.radius, p.y - p.radius, p.radius * 2, (p.radius * 2) / p.img.ratio);
+                (_a = canvasPropsEl.ctx) === null || _a === void 0 ? void 0 : _a.drawImage(img_obj_1, p.x - radius, p.y - radius, radius * 2, (radius * 2) / p.img.ratio);
             };
             if (img_obj_1) {
                 drawImage();
@@ -1428,7 +1436,7 @@ var systemParticles = function (tag_id, params) {
 };
 
 var pJSDom = [];
-var load = function (tag_id, config_json, callback) {
+var load$1 = function (tag_id, config_json, callback) {
     var _a;
     /* pJS elements */
     var pJS_tag = document.getElementById(tag_id);
@@ -1443,7 +1451,7 @@ var load = function (tag_id, config_json, callback) {
     /* create canvas element */
     var canvas_el = document.createElement("canvas");
     canvas_el.className = pJS_canvas_class;
-    canvas_el.style.zIndex = "1";
+    canvas_el.style.zIndex = "10";
     canvas_el.style.width = "100%";
     canvas_el.style.position = "absolute";
     /* append canvas */
@@ -1462,7 +1470,7 @@ var destroy = function () {
     pJSDom = [];
 };
 
-var Particles = /** @class */ (function (_super) {
+var Particles$1 = /** @class */ (function (_super) {
     __extends(Particles, _super);
     function Particles(props) {
         var _this = _super.call(this, props) || this;
@@ -1475,11 +1483,11 @@ var Particles = /** @class */ (function (_super) {
                     destroy();
                 }
                 catch (_a) { }
-                load("particles-js", _this.props.config, function () { });
+                load$1("particles-js", _this.props.config, function () { });
             }
         };
         _this.componentDidMount = function () {
-            load("particles-js", _this.props.config, function () { });
+            load$1("particles-js", _this.props.config, function () { });
         };
         _this.componentWillUnmount = function () {
             destroy();
@@ -1495,18 +1503,19 @@ var Particles = /** @class */ (function (_super) {
     return Particles;
 }(React.Component));
 
-var BackgroundParticles = /** @class */ (function (_super) {
-    __extends(BackgroundParticles, _super);
-    function BackgroundParticles() {
+var Particles = /** @class */ (function (_super) {
+    __extends(Particles, _super);
+    function Particles() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    BackgroundParticles.prototype.render = function () {
-        return (jsxRuntime.jsx(React__default["default"].StrictMode, { children: jsxRuntime.jsx(Particles, __assign({ config: this.props.config }, { children: this.props.children })) }));
+    Particles.prototype.render = function () {
+        return (jsxRuntime.jsx(React__default["default"].StrictMode, { children: jsxRuntime.jsx(Particles$1, __assign({ config: this.props.config }, { children: this.props.children })) }));
     };
-    return BackgroundParticles;
+    return Particles;
 }(React.Component));
+var load = function (config_json, callback) { return load$1("particles-js", config_json, callback); };
 
-exports.BackgroundParticles = BackgroundParticles;
+exports.Particles = Particles;
 exports.destroy = destroy;
 exports.load = load;
 //# sourceMappingURL=index.js.map

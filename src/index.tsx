@@ -1,21 +1,29 @@
 import React, { Component, ReactNode } from "react";
-import { Particles } from "./Components/particles";
+import { Particles as BackgroundParticles } from "./Components/particles";
 import { configParticlesProps } from "./utils/particles/config";
+import { load as loadAnim } from "./utils/particles/index";
 
-interface BackgroundParticlesProps {
+interface ParticlesProps {
   children: ReactNode;
   config?: configParticlesProps;
 }
 
-export class BackgroundParticles extends Component<BackgroundParticlesProps> {
+export class Particles extends Component<ParticlesProps> {
   render() {
     return (
       <React.StrictMode>
-        <Particles config={this.props.config}>{this.props.children}</Particles>
+        <BackgroundParticles config={this.props.config}>
+          {this.props.children}
+        </BackgroundParticles>
       </React.StrictMode>
     );
   }
 }
 
 export type { configParticlesProps } from "./utils/particles/config";
-export { destroy, load } from "./utils/particles/index";
+export { destroy } from "./utils/particles/index";
+
+export const load = (
+  config_json?: configParticlesProps,
+  callback?: () => void
+) => loadAnim("particles-js", config_json, callback);
