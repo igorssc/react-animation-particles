@@ -12,6 +12,13 @@
     "url": "https://github.com/igorssc/react-animation-particles",
     "directory": "example"
   },
+  "keywords": [
+    "react",
+    "canvas",
+    "particles",
+    "typescript",
+    "frontend"
+  ],
   "dependencies": {},
   "devDependencies": {
     "react-animation-particles": "file:../",
