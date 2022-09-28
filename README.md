@@ -14,27 +14,27 @@ This project was developed with the following technologies:
 #### npm
 
 ```bash
-npm install particles-ts
+npm install react-animation-particles
 ```
 
 #### yarn
 
 ```bash
-yarn add particles-ts
+yarn add react-animation-particles
 ```
 
 #### pnpm
 
 ```bash
-pnpm install particles-ts
+pnpm install react-animation-particles
 ```
 
-Particles-ts aims to be a "plug and play" solution, without needing a lot of tinkering. In the ideal case, you can wrap the children you already have with , and get animation for free: <Particles>
+react-animation-particles aims to be a "plug and play" solution, without needing a lot of tinkering. In the ideal case, you can wrap the children you already have with , and get animation for free: <Particles>
 
 **app.js**
 
 ```javascript
-import { Particles } from "particles-ts";
+import { Particles } from "react-animation-particles";
 import config from "assets/particles.config";
 
 export const Example = () => (
@@ -48,11 +48,11 @@ export const Example = () => (
 
 ### 🪄 Demo / Generator
 
-Configure, export, and share your particles-ts configuration:
+Configure, export, and share your react-animation-particles configuration:
 
 ![Demo](https://user-images.githubusercontent.com/26682297/192793755-76c6a16b-eafe-4300-9c05-56df42021ef9.gif)
 
-Access <https://www.particles-ts.vercel.app>
+Access <https://www.react-animation-particles.vercel.app>
 
 **particles.config.json**
 
@@ -172,7 +172,7 @@ Access <https://www.particles-ts.vercel.app>
 You can control the start and end of the animation, just use the `load()` and `destroy()` functions
 
 ```javascript
-import { load } from "particles-ts";
+import { load } from "react-animation-particles";
 
 /* load(@path-json (optional), @callback (optional)); */
 load("assets/particles.json", function () {
@@ -181,7 +181,7 @@ load("assets/particles.json", function () {
 ```
 
 ```javascript
-import { destroy } from "particles-ts";
+import { destroy } from "react-animation-particles";
 
 destroy();
 ```
