@@ -1,5 +1,8 @@
 import { ReactNode, useContext } from "react";
-import { Particles as BackgroundParticles } from "react-animation-particles";
+import {
+  configParticlesProps,
+  Particles as BackgroundParticles,
+} from "react-animation-particles";
 import { ConfigParticlesContext } from "../../hooks/useConfigParticles";
 
 interface ParticlesProps {
@@ -11,7 +14,7 @@ export const Particles = ({ children }: ParticlesProps) => {
 
   return (
     <>
-      <BackgroundParticles config={configParticles}>
+      <BackgroundParticles config={configParticles as configParticlesProps}>
         {children}
       </BackgroundParticles>
     </>

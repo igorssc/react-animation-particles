@@ -8,16 +8,12 @@ interface ParticlesProps {
 }
 
 export class Particles extends Component<ParticlesProps> {
-  constructor(props: ParticlesProps) {
-    super(props);
+  componentDidMount = () => {
+    load("particles-js", this.props.config, function () {});
+  };
 
-    this.state = {
-      lastRenderedComponent: new Date().getTime(),
-    };
-  }
-
-  setLastRenderedComponent = (time: number) => {
-    this.setState({ lastRenderedComponent: time });
+  componentWillUnmount = () => {
+    destroy();
   };
 
   componentDidUpdate = (nextProps: {
@@ -30,14 +26,6 @@ export class Particles extends Component<ParticlesProps> {
 
       load("particles-js", this.props.config, function () {});
     }
-  };
-
-  componentDidMount = () => {
-    load("particles-js", this.props.config, function () {});
-  };
-
-  componentWillUnmount = () => {
-    destroy();
   };
 
   render(): ReactNode {

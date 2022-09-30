@@ -1472,10 +1472,13 @@ var destroy = function () {
 
 var Particles$1 = /** @class */ (function (_super) {
     __extends(Particles, _super);
-    function Particles(props) {
-        var _this = _super.call(this, props) || this;
-        _this.setLastRenderedComponent = function (time) {
-            _this.setState({ lastRenderedComponent: time });
+    function Particles() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.componentDidMount = function () {
+            load$1("particles-js", _this.props.config, function () { });
+        };
+        _this.componentWillUnmount = function () {
+            destroy();
         };
         _this.componentDidUpdate = function (nextProps) {
             if (nextProps.config !== _this.props.config) {
@@ -1485,15 +1488,6 @@ var Particles$1 = /** @class */ (function (_super) {
                 catch (_a) { }
                 load$1("particles-js", _this.props.config, function () { });
             }
-        };
-        _this.componentDidMount = function () {
-            load$1("particles-js", _this.props.config, function () { });
-        };
-        _this.componentWillUnmount = function () {
-            destroy();
-        };
-        _this.state = {
-            lastRenderedComponent: new Date().getTime(),
         };
         return _this;
     }

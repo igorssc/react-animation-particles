@@ -119,24 +119,36 @@ export const ConfigParticles = () => {
           <Accordion title="Image">
             <Panel title="Source">
               <InputText
-                value={particles.shape.image.src}
-                setValue={particles.shape.image.setSrc}
+                value={particles.shape.image.src as string}
+                setValue={
+                  particles.shape.image.setSrc as Dispatch<
+                    SetStateAction<string>
+                  >
+                }
               />
             </Panel>
             <Panel title="Width">
               <InputRange
                 min={0}
                 max={200}
-                value={particles.shape.image.width}
-                setValue={particles.shape.image.setWidth}
+                value={particles.shape.image.width as number}
+                setValue={
+                  particles.shape.image.setWidth as Dispatch<
+                    SetStateAction<number>
+                  >
+                }
               />
             </Panel>
             <Panel title="Height">
               <InputRange
                 min={0}
                 max={200}
-                value={particles.shape.image.height}
-                setValue={particles.shape.image.setHeight}
+                value={particles.shape.image.height as number}
+                setValue={
+                  particles.shape.image.setHeight as Dispatch<
+                    SetStateAction<number>
+                  >
+                }
               />
             </Panel>
           </Accordion>

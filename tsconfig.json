@@ -16,5 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/utils/particlesjs.config.ts", "src/index.tsx"]
+  "include": [
+    "src",
+    "src/utils/particlesjs.config.ts",
+    "src/index.tsx",
+    "example/src/utils/particles.config.ts"
+  ]
 }

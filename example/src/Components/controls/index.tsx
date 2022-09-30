@@ -56,9 +56,9 @@ export const Controls = () => {
             nb_sides: particles.shape.polygon.nb_sides,
           },
           image: {
-            src: particles.shape.image.src,
-            width: particles.shape.image.width,
-            height: particles.shape.image.height,
+            src: particles.shape.image.src as string,
+            width: particles.shape.image.width as number,
+            height: particles.shape.image.height as number,
           },
         },
         opacity: {

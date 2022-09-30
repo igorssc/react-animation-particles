@@ -6,6 +6,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { configParticles as configParticlesDefault } from "../utils/particles.config";
 
 interface ConfigParticlesProviderProps {
   children: ReactNode;
@@ -24,16 +25,66 @@ interface ConfigContextData {
       };
     };
     color: {
-      value: string;
-      setValue: Dispatch<SetStateAction<string>>;
+      value:
+        | string
+        | {
+            r: number;
+            g: number;
+            b: number;
+            h: never;
+            s: never;
+            l: never;
+          }
+        | {
+            h: number;
+            s: number;
+            l: number;
+            r: never;
+            g: never;
+            b: never;
+          }
+        | string[];
+      setValue: Dispatch<
+        SetStateAction<
+          | string
+          | {
+              r: number;
+              g: number;
+              b: number;
+              h: never;
+              s: never;
+              l: never;
+            }
+          | {
+              h: number;
+              s: number;
+              l: number;
+              r: never;
+              g: never;
+              b: never;
+            }
+          | string[]
+        >
+      >;
     };
     shape: {
-      type: Array<
-        "circle" | "edge" | "triangle" | "polygon" | "star" | "image"
-      >;
+      type:
+        | "circle"
+        | "edge"
+        | "triangle"
+        | "polygon"
+        | "star"
+        | "image"
+        | ("circle" | "edge" | "triangle" | "polygon" | "star" | "image")[];
       setType: Dispatch<
         SetStateAction<
-          Array<"circle" | "edge" | "triangle" | "polygon" | "star" | "image">
+          | "circle"
+          | "edge"
+          | "triangle"
+          | "polygon"
+          | "star"
+          | "image"
+          | ("circle" | "edge" | "triangle" | "polygon" | "star" | "image")[]
         >
       >;
       stroke: {
@@ -47,12 +98,12 @@ interface ConfigContextData {
         setNbSides: Dispatch<SetStateAction<number>>;
       };
       image: {
-        src: string;
-        setSrc: Dispatch<SetStateAction<string>>;
-        width: number;
-        setWidth: Dispatch<SetStateAction<number>>;
-        height: number;
-        setHeight: Dispatch<SetStateAction<number>>;
+        src: string | undefined;
+        setSrc: Dispatch<SetStateAction<string | undefined>>;
+        width: number | undefined;
+        setWidth: Dispatch<SetStateAction<number | undefined>>;
+        height: number | undefined;
+        setHeight: Dispatch<SetStateAction<number | undefined>>;
       };
     };
     opacity: {
@@ -152,15 +203,30 @@ interface ConfigContextData {
       onhover: {
         enable: boolean;
         setEnable: Dispatch<SetStateAction<boolean>>;
-        mode: Array<"grab" | "bubble" | "repulse">;
-        setMode: Dispatch<SetStateAction<Array<"grab" | "bubble" | "repulse">>>;
+        mode: "grab" | "bubble" | "repulse" | ("grab" | "bubble" | "repulse")[];
+        setMode: Dispatch<
+          SetStateAction<
+            "grab" | "bubble" | "repulse" | ("grab" | "bubble" | "repulse")[]
+          >
+        >;
       };
       onclick: {
         enable: boolean;
         setEnable: Dispatch<SetStateAction<boolean>>;
-        mode: Array<"push" | "remove" | "bubble" | "repulse">;
+        mode:
+          | "bubble"
+          | "repulse"
+          | "push"
+          | "remove"
+          | ("bubble" | "repulse" | "push" | "remove")[];
         setMode: Dispatch<
-          SetStateAction<Array<"push" | "remove" | "bubble" | "repulse">>
+          SetStateAction<
+            | "bubble"
+            | "repulse"
+            | "push"
+            | "remove"
+            | ("bubble" | "repulse" | "push" | "remove")[]
+          >
         >;
       };
       resize: boolean;
@@ -214,125 +280,172 @@ export const ConfigParticlesContext = createContext<ConfigContextData>(
 export const ConfigParticlesProvider = ({
   children,
 }: ConfigParticlesProviderProps) => {
-  const [particlesNumberValue, setParticlesNumberValue] = useState(60);
+  const [particlesNumberValue, setParticlesNumberValue] = useState(
+    configParticlesDefault.particles.number.value
+  );
   const [particlesNumberDensityEnable, setParticlesNumberDensityEnable] =
-    useState(true);
-  const [particlesNumberDensityArea, setParticlesNumberDensityArea] =
-    useState(800);
-  const [particlesColorValue, setParticlesColorValue] = useState("#199ada");
-  const [particlesShapeType, setParticlesShapeType] = useState<
-    Array<"circle" | "triangle" | "star" | "polygon" | "edge" | "image">
-  >(["star"]);
-  const [particlesShapeStrokeWidth, setParticlesShapeStrokeWidth] = useState(0);
-  const [particlesShapeStrokeColor, setParticlesShapeStrokeColor] =
-    useState("#000000");
-  const [particlesShapePolygonSides, setParticlesShapePolygonSides] =
-    useState(5);
-  const [particlesShapeImageSrc, setParticlesShapeImageSrc] = useState("");
-  const [particlesShapeImageWidth, setParticlesShapeImageWidth] = useState(300);
-  const [particlesShapeImageHeight, setParticlesShapeImageHeight] =
-    useState(300);
-  const [particlesOpacityValue, setParticlesOpacityValue] = useState(0.5);
-  const [particlesOpacityRandom, setParticlesOpacityRandom] = useState(false);
-  const [particlesOpacityAnimEnable, setParticlesOpacityAnimEnable] =
-    useState(false);
-  const [particlesOpacityAnimSpeed, setParticlesOpacityAnimSpeed] = useState(1);
+    useState(configParticlesDefault.particles.number.density.enable);
+  const [particlesNumberDensityArea, setParticlesNumberDensityArea] = useState(
+    configParticlesDefault.particles.number.density.value_area
+  );
+  const [particlesColorValue, setParticlesColorValue] = useState(
+    configParticlesDefault.particles.color.value
+  );
+  const [particlesShapeType, setParticlesShapeType] = useState(
+    configParticlesDefault.particles.shape.type
+  );
+  const [particlesShapeStrokeWidth, setParticlesShapeStrokeWidth] = useState(
+    configParticlesDefault.particles.shape.stroke.width
+  );
+  const [particlesShapeStrokeColor, setParticlesShapeStrokeColor] = useState(
+    configParticlesDefault.particles.shape.stroke.color
+  );
+  const [particlesShapePolygonSides, setParticlesShapePolygonSides] = useState(
+    configParticlesDefault.particles.shape.polygon.nb_sides
+  );
+  const [particlesShapeImageSrc, setParticlesShapeImageSrc] = useState(
+    configParticlesDefault.particles.shape.image?.src
+  );
+  const [particlesShapeImageWidth, setParticlesShapeImageWidth] = useState(
+    configParticlesDefault.particles.shape.image?.width
+  );
+  const [particlesShapeImageHeight, setParticlesShapeImageHeight] = useState(
+    configParticlesDefault.particles.shape.image?.height
+  );
+  const [particlesOpacityValue, setParticlesOpacityValue] = useState(
+    configParticlesDefault.particles.opacity.value
+  );
+  const [particlesOpacityRandom, setParticlesOpacityRandom] = useState(
+    configParticlesDefault.particles.opacity.random
+  );
+  const [particlesOpacityAnimEnable, setParticlesOpacityAnimEnable] = useState(
+    configParticlesDefault.particles.opacity.anim.enable
+  );
+  const [particlesOpacityAnimSpeed, setParticlesOpacityAnimSpeed] = useState(
+    configParticlesDefault.particles.opacity.anim.speed
+  );
   const [particlesOpacityAnimOpacityMin, setParticlesOpacityAnimOpacityMin] =
-    useState(0.1);
-  const [particlesOpacityAnimSync, setParticlesOpacityAnimSync] =
-    useState(false);
-  const [particlesSizeValue, setParticlesSizeValue] = useState(3);
-  const [particlesSizeRandom, setParticlesSizeRandom] = useState(true);
-  const [particlesSizeAnimEnable, setParticlesSizeAnimEnable] = useState(false);
-  const [particlesSizeAnimSpeed, setParticlesSizeAnimSpeed] = useState(40);
-  const [particlesSizeAnimSizeMin, setParticlesSizeAnimSizeMin] = useState(0.1);
-  const [particlesSizeAnimSync, setParticlesSizeAnimSync] = useState(false);
-  const [particlesLineLinkedEnable, setParticlesLineLinkedEnable] =
-    useState(true);
+    useState(configParticlesDefault.particles.opacity.anim.opacity_min);
+  const [particlesOpacityAnimSync, setParticlesOpacityAnimSync] = useState(
+    configParticlesDefault.particles.opacity.anim.sync
+  );
+  const [particlesSizeValue, setParticlesSizeValue] = useState(
+    configParticlesDefault.particles.size.value
+  );
+  const [particlesSizeRandom, setParticlesSizeRandom] = useState(
+    configParticlesDefault.particles.size.random
+  );
+  const [particlesSizeAnimEnable, setParticlesSizeAnimEnable] = useState(
+    configParticlesDefault.particles.size.anim.enable
+  );
+  const [particlesSizeAnimSpeed, setParticlesSizeAnimSpeed] = useState(
+    configParticlesDefault.particles.size.anim.speed
+  );
+  const [particlesSizeAnimSizeMin, setParticlesSizeAnimSizeMin] = useState(
+    configParticlesDefault.particles.size.anim.size_min
+  );
+  const [particlesSizeAnimSync, setParticlesSizeAnimSync] = useState(
+    configParticlesDefault.particles.size.anim.sync
+  );
+  const [particlesLineLinkedEnable, setParticlesLineLinkedEnable] = useState(
+    configParticlesDefault.particles.line_linked.enable
+  );
   const [particlesLineLinkedDistance, setParticlesLineLinkedDistance] =
-    useState(150);
-  const [particlesLineLinkedColor, setParticlesLineLinkedColor] =
-    useState("#199ada");
-  const [particlesLineLinkedOpacity, setParticlesLineLinkedOpacity] =
-    useState(0.3);
-  const [particlesLineLinkedWidth, setParticlesLineLinkedWidth] = useState(1);
-  const [particlesMoveEnable, setParticlesMoveEnable] = useState(true);
-  const [particlesMoveSpeed, setParticlesMoveSpeed] = useState(2);
-  const [particlesMoveDirection, setParticlesMoveDirection] = useState<
-    | "none"
-    | "top"
-    | "top-right"
-    | "right"
-    | "bottom-right"
-    | "bottom"
-    | "bottom-left"
-    | "left"
-    | "top-left"
-  >("none");
-  const [particlesMoveRandom, setParticlesMoveRandom] = useState(false);
-  const [particlesMoveStraight, setParticlesMoveStraight] = useState(false);
-  const [particlesMoveOutMode, setParticlesMoveOutMode] = useState<
-    "out" | "bounce"
-  >("out");
-  const [particlesMoveBounce, setParticlesMoveBounce] = useState(false);
-  const [particlesMoveAttractEnable, setParticlesMoveAttractEnable] =
-    useState(false);
+    useState(configParticlesDefault.particles.line_linked.distance);
+  const [particlesLineLinkedColor, setParticlesLineLinkedColor] = useState(
+    configParticlesDefault.particles.line_linked.color
+  );
+  const [particlesLineLinkedOpacity, setParticlesLineLinkedOpacity] = useState(
+    configParticlesDefault.particles.line_linked.opacity
+  );
+  const [particlesLineLinkedWidth, setParticlesLineLinkedWidth] = useState(
+    configParticlesDefault.particles.line_linked.width
+  );
+  const [particlesMoveEnable, setParticlesMoveEnable] = useState(
+    configParticlesDefault.particles.move.enable
+  );
+  const [particlesMoveSpeed, setParticlesMoveSpeed] = useState(
+    configParticlesDefault.particles.move.speed
+  );
+  const [particlesMoveDirection, setParticlesMoveDirection] = useState(
+    configParticlesDefault.particles.move.direction
+  );
+  const [particlesMoveRandom, setParticlesMoveRandom] = useState(
+    configParticlesDefault.particles.move.random
+  );
+  const [particlesMoveStraight, setParticlesMoveStraight] = useState(
+    configParticlesDefault.particles.move.straight
+  );
+  const [particlesMoveOutMode, setParticlesMoveOutMode] = useState(
+    configParticlesDefault.particles.move.out_mode
+  );
+  const [particlesMoveBounce, setParticlesMoveBounce] = useState(
+    configParticlesDefault.particles.move.bounce
+  );
+  const [particlesMoveAttractEnable, setParticlesMoveAttractEnable] = useState(
+    configParticlesDefault.particles.move.attract.enable
+  );
   const [particlesMoveAttractRotateX, setParticlesMoveAttractRotateX] =
-    useState(600);
+    useState(configParticlesDefault.particles.move.attract.rotateX);
   const [particlesMoveAttractRotateY, setParticlesMoveAttractRotateY] =
-    useState(1200);
+    useState(configParticlesDefault.particles.move.attract.rotateY);
 
-  const [interactivityDetectOn, setInteractivityDetectOn] = useState<
-    "canvas" | "window"
-  >("canvas");
+  const [interactivityDetectOn, setInteractivityDetectOn] = useState(
+    configParticlesDefault.interactivity.detect_on
+  );
   const [
     interactivityEventsOnHoverEnable,
     setInteractivityEventsOnHoverEnable,
-  ] = useState(false);
+  ] = useState(configParticlesDefault.interactivity.events.onhover.enable);
   const [interactivityEventsOnHoverMode, setInteractivityEventsOnHoverMode] =
-    useState<Array<"grab" | "bubble" | "repulse">>(["grab"]);
+    useState(configParticlesDefault.interactivity.events.onhover.mode);
   const [
     interactivityEventsOnClickEnable,
     setInteractivityEventsOnClickEnable,
-  ] = useState(true);
+  ] = useState(configParticlesDefault.interactivity.events.onclick.enable);
   const [interactivityEventsOnClickMode, setInteractivityEventsOnClickMode] =
-    useState<Array<"push" | "remove" | "bubble" | "repulse">>(["push"]);
-  const [interactivityEventsResize, setInteractivityEventsResize] =
-    useState(true);
+    useState(configParticlesDefault.interactivity.events.onclick.mode);
+  const [interactivityEventsResize, setInteractivityEventsResize] = useState(
+    configParticlesDefault.interactivity.events.resize
+  );
   const [interactivityModesGrabDistance, setInteractivityModesGrabDistance] =
-    useState(400);
+    useState(configParticlesDefault.interactivity.modes.grab.distance);
   const [
     interactivityModesGrabLineLinkedOpacity,
     setInteractivityModesGrabLineLinkedOpacity,
-  ] = useState(1);
+  ] = useState(
+    configParticlesDefault.interactivity.modes.grab.line_linked.opacity
+  );
   const [
     interactivityModesBubbleDistance,
     setInteractivityModesBubbleDistance,
-  ] = useState(30);
+  ] = useState(configParticlesDefault.interactivity.modes.bubble.distance);
   const [interactivityModesBubbleSize, setInteractivityModesBubbleSize] =
-    useState(4);
+    useState(configParticlesDefault.interactivity.modes.bubble.size);
   const [
     interactivityModesBubbleDuration,
     setInteractivityModesBubbleDuration,
-  ] = useState(2);
+  ] = useState(configParticlesDefault.interactivity.modes.bubble.duration);
   const [interactivityModesBubbleOpacity, setInteractivityModesBubbleOpacity] =
-    useState(0.8);
+    useState(configParticlesDefault.interactivity.modes.bubble.opacity);
   const [interactivityModesBubbleSpeed, setInteractivityModesBubbleSpeed] =
-    useState(3);
+    useState(configParticlesDefault.interactivity.modes.bubble.speed);
   const [
     interactivityModesRepulseDistance,
     setInteractivityModesRepulseDistance,
-  ] = useState(200);
+  ] = useState(configParticlesDefault.interactivity.modes.repulse.distance);
   const [
     interactivityModesRepulseDuration,
     setInteractivityModesRepulseDuration,
-  ] = useState(0.4);
+  ] = useState(configParticlesDefault.interactivity.modes.repulse.duration);
   const [interactivityModesPushNumbers, setInteractivityModesPushNumbers] =
-    useState(4);
+    useState(configParticlesDefault.interactivity.modes.push.particles_nb);
   const [interactivityModesRemoveNumbers, setInteractivityModesRemoveNumbers] =
-    useState(4);
+    useState(configParticlesDefault.interactivity.modes.remove.particles_nb);
 
-  const [retinaDetect, setRetinaDetect] = useState(false);
+  const [retinaDetect, setRetinaDetect] = useState(
+    configParticlesDefault.retina_detect
+  );
 
   const configParticles = {
     particles: {
