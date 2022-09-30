@@ -3,6 +3,7 @@ import { canvasPropsEl } from "../system/canvas/element";
 
 export const retinaInit = () => {
   if (
+    typeof window !== "undefined" &&
     system.configParticlesFinal.retina_detect &&
     window.devicePixelRatio > 1
   ) {

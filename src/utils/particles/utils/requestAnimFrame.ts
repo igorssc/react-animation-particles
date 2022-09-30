@@ -1,8 +1,8 @@
 export const requestAnimFrame =
-  window.requestAnimationFrame ||
+  window?.requestAnimationFrame ||
   function (callback: Function) {
-    window.setTimeout(callback, 1000 / 60);
+    window?.setTimeout(callback, 1000 / 60);
   };
 
 export const cancelRequestAnimFrame =
-  window.cancelAnimationFrame || clearTimeout;
+  window?.cancelAnimationFrame || clearTimeout;

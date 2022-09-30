@@ -47,7 +47,7 @@ export const createSvgImg = (
   let svg = new Blob([coloredSvgXml], {
       type: "image/svg+xml;charset=utf-8",
     }),
-    DOMURL = window.URL || window.webkitURL || window,
+    DOMURL = window?.URL || window?.webkitURL || window,
     url = DOMURL.createObjectURL(svg);
 
   /* create particle img obj */

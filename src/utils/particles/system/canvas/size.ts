@@ -10,6 +10,7 @@ export const canvasSize = () => {
   canvasPropsEl.el && (canvasPropsEl.el.height = canvasPropsEl.h);
 
   if (
+    typeof window !== "undefined" &&
     system.configParticlesFinal &&
     system.configParticlesFinal.interactivity.events.resize
   ) {

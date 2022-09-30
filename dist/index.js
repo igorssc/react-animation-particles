@@ -180,11 +180,11 @@ var System = /** @class */ (function () {
     return System;
 }());
 
-var requestAnimFrame = window.requestAnimationFrame ||
+var requestAnimFrame = (window === null || window === void 0 ? void 0 : window.requestAnimationFrame) ||
     function (callback) {
-        window.setTimeout(callback, 1000 / 60);
+        window === null || window === void 0 ? void 0 : window.setTimeout(callback, 1000 / 60);
     };
-var cancelRequestAnimFrame = window.cancelAnimationFrame || clearTimeout;
+var cancelRequestAnimFrame = (window === null || window === void 0 ? void 0 : window.cancelAnimationFrame) || clearTimeout;
 
 var drawShape = function (c, startX, startY, sideLength, sideCountNumerator, sideCountDenominator) {
     var sideCount = sideCountNumerator * sideCountDenominator;
@@ -853,7 +853,8 @@ var hexToRgb = function (hex) {
 };
 
 var retinaInit = function () {
-    if (system.configParticlesFinal.retina_detect &&
+    if (typeof window !== "undefined" &&
+        system.configParticlesFinal.retina_detect &&
         window.devicePixelRatio > 1) {
         canvasPropsEl.pxratio = window.devicePixelRatio;
         system.retina = true;
@@ -908,7 +909,7 @@ var createSvgImg = function (color, opacity, img) {
     /* prepare to create img with colored svg */
     var svg = new Blob([coloredSvgXml], {
         type: "image/svg+xml;charset=utf-8",
-    }), DOMURL = window.URL || window.webkitURL || window, url = DOMURL.createObjectURL(svg);
+    }), DOMURL = (window === null || window === void 0 ? void 0 : window.URL) || (window === null || window === void 0 ? void 0 : window.webkitURL) || window, url = DOMURL.createObjectURL(svg);
     /* create particle img obj */
     var finalImg = new Image();
     finalImg.addEventListener("load", function () {
@@ -1174,7 +1175,8 @@ var densityAutoParticles = function () {
 var canvasSize = function () {
     canvasPropsEl.el && (canvasPropsEl.el.width = canvasPropsEl.w);
     canvasPropsEl.el && (canvasPropsEl.el.height = canvasPropsEl.h);
-    if (system.configParticlesFinal &&
+    if (typeof window !== "undefined" &&
+        system.configParticlesFinal &&
         system.configParticlesFinal.interactivity.events.resize) {
         window.addEventListener("resize", function () {
             var _a, _b;
@@ -1438,32 +1440,32 @@ var systemParticles = function (tag_id, params) {
 var pJSDom = [];
 var load$1 = function (tag_id, config_json, callback) {
     var _a;
-    if (typeof window === "undefined")
-        return;
-    /* pJS elements */
-    var pJS_tag = document.getElementById(tag_id);
-    var pJS_canvas_class = "particles-js-canvas-el";
-    var exist_canvas = pJS_tag === null || pJS_tag === void 0 ? void 0 : pJS_tag.getElementsByClassName(pJS_canvas_class);
-    /* remove canvas if exists into the pJS target tag */
-    if (exist_canvas === null || exist_canvas === void 0 ? void 0 : exist_canvas.length) {
-        while (exist_canvas.length > 0) {
-            pJS_tag === null || pJS_tag === void 0 ? void 0 : pJS_tag.removeChild(exist_canvas[0]);
+    if (typeof window !== "undefined") {
+        /* pJS elements */
+        var pJS_tag = document.getElementById(tag_id);
+        var pJS_canvas_class = "particles-js-canvas-el";
+        var exist_canvas = pJS_tag === null || pJS_tag === void 0 ? void 0 : pJS_tag.getElementsByClassName(pJS_canvas_class);
+        /* remove canvas if exists into the pJS target tag */
+        if (exist_canvas === null || exist_canvas === void 0 ? void 0 : exist_canvas.length) {
+            while (exist_canvas.length > 0) {
+                pJS_tag === null || pJS_tag === void 0 ? void 0 : pJS_tag.removeChild(exist_canvas[0]);
+            }
         }
+        /* create canvas element */
+        var canvas_el = document.createElement("canvas");
+        canvas_el.className = pJS_canvas_class;
+        canvas_el.style.zIndex = "10";
+        canvas_el.style.width = "100%";
+        canvas_el.style.position = "absolute";
+        /* append canvas */
+        var canvas = (_a = document.getElementById(tag_id)) === null || _a === void 0 ? void 0 : _a.prepend(canvas_el);
+        /* launch particle.js */
+        if (canvas !== null) {
+            pJSDom.push(systemParticles(tag_id, config_json));
+        }
+        if (callback)
+            callback();
     }
-    /* create canvas element */
-    var canvas_el = document.createElement("canvas");
-    canvas_el.className = pJS_canvas_class;
-    canvas_el.style.zIndex = "10";
-    canvas_el.style.width = "100%";
-    canvas_el.style.position = "absolute";
-    /* append canvas */
-    var canvas = (_a = document.getElementById(tag_id)) === null || _a === void 0 ? void 0 : _a.prepend(canvas_el);
-    /* launch particle.js */
-    if (canvas !== null) {
-        pJSDom.push(systemParticles(tag_id, config_json));
-    }
-    if (callback)
-        callback();
 };
 var destroy = function () {
     var _a;

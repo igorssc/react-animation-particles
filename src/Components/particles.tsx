@@ -9,11 +9,12 @@ interface ParticlesProps {
 
 export class Particles extends Component<ParticlesProps> {
   componentDidMount = () => {
-    load("particles-js", this.props.config, function () {});
+    typeof window !== "undefined" &&
+      load("particles-js", this.props.config, function () {});
   };
 
   componentWillUnmount = () => {
-    destroy();
+    typeof window !== "undefined" && destroy();
   };
 
   componentDidUpdate = (nextProps: {
