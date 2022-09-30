@@ -1438,6 +1438,8 @@ var systemParticles = function (tag_id, params) {
 var pJSDom = [];
 var load$1 = function (tag_id, config_json, callback) {
     var _a;
+    if (typeof window === "undefined")
+        return;
     /* pJS elements */
     var pJS_tag = document.getElementById(tag_id);
     var pJS_canvas_class = "particles-js-canvas-el";
