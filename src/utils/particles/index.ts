@@ -9,6 +9,7 @@ export const load = (
   config_json?: configParticlesProps,
   callback?: () => void
 ) => {
+  if (typeof window === "undefined") return;
   /* pJS elements */
   const pJS_tag = document.getElementById(tag_id);
 
