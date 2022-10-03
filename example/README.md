@@ -186,6 +186,64 @@ import { destroy } from "react-animation-particles";
 destroy();
 ```
 
+### ⚓ `SSR`
+
+You can use the package with SSR frameworks, like nextJs, for that you just have to do a few steps:
+
+```typescript
+// index.tsx
+
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+import { BackgroundParticles } from "../Components/Particles";
+
+const Content = () => {
+  return (
+    <>
+      <p style={{ height: "100vh" }}>Hello, world!</p>
+    </>
+  );
+};
+
+const Home: NextPage = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  if (!isLoaded) {
+    return (
+      <>
+        <Content />
+      </>
+    );
+  }
+  return (
+    <BackgroundParticles>
+      <Content />
+    </BackgroundParticles>
+  );
+};
+
+export default Home;
+```
+
+```typescript
+// Components/Particles.tsx
+
+import { ReactNode } from "react";
+import { Particles } from "react-animation-particles";
+
+export const BackgroundParticles = ({ children }: { children: ReactNode }) => {
+  return (
+    <>
+      <Particles>{children}</Particles>
+    </>
+  );
+};
+```
+
 ### `Options`
 
 | key                                                   | option type / notes                                                                                      | example                                                                                                                                                            |

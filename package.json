@@ -1,6 +1,6 @@
 {
   "name": "react-animation-particles",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Igor Santos <igorsantoscosta@gmail.com>",
   "description": "A lightweight JavaScript library for creating particles",
   "homepage": "https://react-animation-particles.vercel.app",
@@ -20,7 +20,7 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "module": "dist/index.js",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.0.6",
