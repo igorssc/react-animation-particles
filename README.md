@@ -26,7 +26,7 @@ yarn add react-animation-particles
 #### pnpm
 
 ```bash
-pnpm install react-animation-particles
+pnpm add react-animation-particles
 ```
 
 react-animation-particles aims to be a "plug and play" solution, without needing a lot of tinkering. In the ideal case, you can wrap the children you already have with , and get animation for free: <Particles>
