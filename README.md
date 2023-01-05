@@ -303,7 +303,7 @@ export const BackgroundParticles = ({ children }: { children: ReactNode }) => {
 | `interactivity.events.modes.push.particles_nb`        | number                                                                                                   | `4`                                                                                                                                                                |
 | `retina_detect`                                       | boolean                                                                                                  | `true` / `false`                                                                                                                                                   |
 
-## 📝 Licence
+## 📝 License
 
 This project is under MIT licence. See the archive [LICENSE](LICENSE.md) to more details.
 
