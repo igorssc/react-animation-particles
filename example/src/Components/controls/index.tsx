@@ -147,7 +147,7 @@ export const Controls = () => {
 
     const dataStr =
       "data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(json));
+      encodeURIComponent(JSON.stringify(json, null, 2));
 
     const a = document.createElement("a");
     a.href = dataStr;
